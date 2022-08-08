@@ -9,4 +9,4 @@ Please make sure to update tests as appropriate.
 
 ## Maintainers
 
-[@VittorioRossi] (hhttps://github.com/VittorioRossi)
+[@VittorioRossi](https://github.com/VittorioRossi)
