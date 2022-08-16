@@ -10,3 +10,13 @@ Please make sure to update tests as appropriate.
 ## Maintainers
 
 [@VittorioRossi](https://github.com/VittorioRossi)
+
+
+# Testing the model
+
+## Testing on Colab
+
+Access on the [Colab notebook](https://colab.research.google.com/drive/1Dg1cvifrzqrtuhPyf_kTOCejl3wbt9c_?usp=sharing) to test the trained model interactivelly.
+
+
+
