@@ -52,10 +52,10 @@ def create_index(dataset, embedding_model = None):
 
   index = tfrs.layers.factorized_top_k.ScaNN() #this is the model without the 
 
-  test_value = tf.constant(list(dataset.take(1).as_numpy_iterator()))
+  test_value = tf.constant(list(dataset.as_numpy_iterator())[0])
   if embedding_model is not None:
     index = tfrs.layers.factorized_top_k.ScaNN(query_model = embedding_model)
-    test_value = tf.constat([''])
+    test_value = tf.constant([''])
 
   index.index_from_dataset(dataset.batch(512))
 
@@ -63,12 +63,12 @@ def create_index(dataset, embedding_model = None):
 
   return index
 
-"""# Creating and saving the index in SaveModel format
+"""# General function to create and save the index in SaveModel format
 
 The following function generates the servable version of the model.
 """
 
-def create_save(dataset:tf.Tensor, save_path:str, version:int = 1, embedding_model:tf.keras.Model = None, zip:bool = False):
+def create_save(dataset:tf.Tensor or tf.data.Dataset, save_path:str, version:int = 1, embedding_model:tf.keras.Model = None, zip:bool = False):
   """
   :param dataset: a tensorflow dataset with the embedded version of the space we want to query in
   :param save_path: a path, as string, that saves the model 
@@ -85,6 +85,54 @@ def create_save(dataset:tf.Tensor, save_path:str, version:int = 1, embedding_mod
   index.save(filepath = path) #saving the index
   
   if zip:
-    shutil.make_archive(save_path, 'zip') #zipping if zip is True
+    shutil.make_archive(base_name = save_path, format = 'zip', base_dir = save_path) #zipping if zip is True
   
   return index
+
+"""# Create and save specific
+
+Creates and saves the model on the job_desc dataset with keyword extraction and using the Universal Sentence Encoder model
+
+- get_repo:
+"""
+
+def get_repo() -> None:
+  """
+  clones the repository atuomatically
+  """
+
+  try:
+    os.system('git clone https://github.com/UniversalDot/tensorflow')
+  except:
+    print('it was not possible to get the dataset')
+    return
+  finally:
+    print('dataset downloaded')
+
+def get_dataset() -> tf.Tensor:
+  """
+  loads the dataset in a format readable from the create_save function
+  """
+  df = tf.data.Dataset.load('/content/tensorflow/dataset/key_embeddings')
+  df = tf.reshape(df.get_single_element(), (-1, 512))
+  df = tf.data.Dataset.from_tensor_slices(df)
+  return df
+
+def jobdesc_create_save(save_path:str, version:int = 1, zip:bool = False):
+  """
+  Create and saves the index model with the dataset jobdesc with keywords extracted and embedded with the Universal Sentence Encoder
+  
+  :param save_path: a path, as string, that saves the model 
+  :param version: creates a subfolder to the 
+  :param zip: a boolean, if it is true, creates a zip of the model saved
+  :return: the index model 
+  """
+  get_repo() #loading the github repo
+  df = get_dataset() #loading the embedding dataset from the github repop
+  print('Got repo and dataset')
+  USE_encoder = hub.load('https://tfhub.dev/google/universal-sentence-encoder/4') #loading the encoder
+  print('Got encoder\nstarting to train the model...')
+
+  model = create_save(df, save_path, version, USE_encoder, zip) #creating and saving the model
+  print('Model trained')
+  return model
