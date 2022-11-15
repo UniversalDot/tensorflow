@@ -1,1 +1,0 @@
-The current folder contains the notebook to build the index model given a dataset and to save that model in the savemodel format for tesnorflow serving. The notebook was run in google Colab but in order to run it locally there is the requirements file that contains all the packages needed to use the script.

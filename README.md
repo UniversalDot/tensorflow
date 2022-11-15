@@ -7,6 +7,28 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+# Model creation
+The model used for the recommendation system is the [ScaNN](https://github.com/google-research/google-research/tree/master/scann) implemented through [Tensorflow](https://www.tensorflow.org/recommenders/api_docs/python/tfrs/layers/factorized_top_k/ScaNN) to allow serving with Tensorflow Serving service.
+The model creation process each time requires different steps:
+- Preprocessing
+    - Simple text preprocessing
+    - Keyword extraction
+- Embedding
+- Training of the ScaNN
+- Testing
+- Saving and serving
+## Preprocessing
+### Simple text preprocessing
+### Keyword extraction
+TODO
+## Embedding
+TODO
+## Training
+The training of the ScaNN can be found in model_creation folder
+## Testing
+TODO
+## Saving and serving
+The saving of the ScaNN can be found in model_creation folder
 # Deployment
 
 The model is deployed to Tensorflow Serving. Its design is outlined in the image below.
