@@ -16,15 +16,17 @@ jobs_df = None
 embeddings_df = None
 
 def update():
+    start_time = time.time()
+
     global jobs_df, embeddings_df
     # TODO
     jobs_df = pd.read_csv("../dataset/jobsdesc_extended.csv")
     # TODO
     embeddings_df = pd.read_csv("../dataset/embeddings-msmarco-distilbert-base-v4.csv")
 
-    print("updated")
 
-
+    print("Files are Updated                     :",
+          time.time() - start_time)
 
 
 # API ROUTES BELOW
@@ -41,6 +43,9 @@ class predict(Resource):
         :param INTEREST:
         :return:
         """
+
+        # Update the Database
+        update()
 
         # Filter on Reputation; Eliminate the tasks that requires more reputation than the user has.
         start_time = time.time()
@@ -106,8 +111,8 @@ api.add_resource(predict, "/predict/<int:AVAILABILITY>/<int:REPUTATION>/<string:
 
 
 
+# NOTE: IF YOU RUN 'flask run', THE CODE BELOW WON'T BE EXECUTED
 if __name__ == '__main__':
-    update()
     app.run(debug=True)
 
 
