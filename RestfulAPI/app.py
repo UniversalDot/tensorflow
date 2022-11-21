@@ -18,9 +18,9 @@ embeddings_df = None
 def update():
     global jobs_df, embeddings_df
     # TODO
-    jobs_df = pd.read_csv("data/jobsdesc_extended.csv")
+    jobs_df = pd.read_csv("../dataset/jobsdesc_extended.csv")
     # TODO
-    embeddings_df = pd.read_csv("data/embeddings-msmarco-distilbert-base-v4.csv")
+    embeddings_df = pd.read_csv("../dataset/embeddings-msmarco-distilbert-base-v4.csv")
 
     print("updated")
 
