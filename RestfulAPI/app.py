@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import time
 
 from NaturalLanguageProcessing import udotNLP
@@ -8,25 +9,62 @@ from annoy import AnnoyIndex
 from flask import Flask
 from flask_restful import Resource, Api
 
+import tensorflow_hub as hub
+import tensorflow as tf
+
 
 
 # AUX METHODS BELOW
 
 jobs_df = None
 embeddings_df = None
+embed = None
+
+
+def get_repo() -> None:
+  """
+  clones the repository atuomatically
+  """
+
+  try:
+    os.system('git clone https://github.com/UniversalDot/tensorflow')
+  except:
+    print('it was not possible to get the dataset')
+    return
+  finally:
+    print('dataset downloaded')
+
+
+def get_dataset() -> tf.Tensor:
+  """
+  loads the dataset in a format readable from the create_save function
+  """
+  df = tf.data.Dataset.load('/content/tensorflow/dataset/key_embeddings')
+  df = tf.reshape(df.get_single_element(), (-1, 512))
+  df = tf.data.Dataset.from_tensor_slices(df)
+  return df
+
 
 def update():
     start_time = time.time()
 
-    global jobs_df, embeddings_df
+    global jobs_df, embeddings_df, embed
     # TODO
     jobs_df = pd.read_csv("../dataset/jobsdesc_extended.csv")
     # TODO
-    embeddings_df = pd.read_csv("../dataset/embeddings-msmarco-distilbert-base-v4.csv")
+    # embeddings_df = pd.read_csv("../dataset/embeddings-msmarco-distilbert-base-v4.csv")
+    embeddings_df = pd.read_csv("jobsdesc_embeddings_use.csv")
+
+    print("Downloading Embedder")
+    if embed is None:
+        module_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
+        embed = hub.KerasLayer(module_url, trainable=True, name='USE_embedding')
+
 
 
     print("Files are Updated                     :",
           time.time() - start_time)
+
 
 
 # API ROUTES BELOW
@@ -86,7 +124,8 @@ class predict(Resource):
         # Preprocess INTEREST
         start_time = time.time()
         interest_keywords = udotNLP.text2Keywords(INTEREST)
-        interest_embeddings = udotNLP.text2Embeddings(interest_keywords)
+
+        interest_embeddings = embed(interest_keywords)
         print("Preprocessing of INTEREST is done     :"
               , time.time() - start_time)
 
