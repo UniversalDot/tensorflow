@@ -53,7 +53,7 @@ def update():
     jobs_df = pd.read_csv("../dataset/jobsdesc_extended.csv")
     # TODO
     # embeddings_df = pd.read_csv("../dataset/embeddings-msmarco-distilbert-base-v4.csv")
-    embeddings_df = pd.read_csv("jobsdesc_embeddings_use.csv")
+    embeddings_df = pd.read_csv("../dataset/jobsdesc_embeddings_use.csv")
 
     print("Downloading Embedder")
     if embed is None:
