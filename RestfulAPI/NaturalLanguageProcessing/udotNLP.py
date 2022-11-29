@@ -1,6 +1,6 @@
 import yake
-from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
+# from sentence_transformers import SentenceTransformer
+# from tqdm import tqdm
 
 
 def text2Keywords(data: list, _ngram: int = 3, _top: int = 25, _windowSize: int = 1) -> list:
