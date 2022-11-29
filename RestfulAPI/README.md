@@ -12,7 +12,7 @@ Please make sure to update tests as appropriate.
 Start a terminal on tensorflow/RestfulAPI and choose one of the following options:
 - To run through flask, use the following
 ```
-run flask
+flask run
 ```
 - To run through python (not recommended)
 ``` 
