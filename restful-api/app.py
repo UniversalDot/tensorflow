@@ -23,7 +23,7 @@ embed = None
 
 def get_repo() -> None:
   """
-  clones the repository atuomatically
+  clones the repository automatically
   """
 
   try:
@@ -87,7 +87,7 @@ class predict(Resource):
 
         # Filter on Reputation; Eliminate the tasks that requires more reputation than the user has.
         start_time = time.time()
-        filtered_reputation = jobs_df[jobs_df["Requiered Reputation"] < REPUTATION]
+        filtered_reputation = jobs_df[jobs_df["Required Reputation"] < REPUTATION]
         print("Filtered on Reputation                :",
               time.time() - start_time, "Remaining Jobs:", len(filtered_reputation))
 
