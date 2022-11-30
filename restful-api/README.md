@@ -7,9 +7,19 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-# How to Run
+# Install pre-requisites
 
 Start a terminal on tensorflow/RestfulAPI and choose one of the following options:
+
+Make sure you have pip installed. On ubuntu, run,
+```
+apt install python3-pip
+```
+and, then install the dependencies with...
+```
+pip install -r requirements.txt
+```
+# How to Run
 - To run through flask, use the following
 ```
 flask run
