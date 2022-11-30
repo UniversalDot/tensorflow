@@ -1,6 +1,6 @@
 import yake
-from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
+# from sentence_transformers import SentenceTransformer
+# from tqdm import tqdm
 
 
 def text2Keywords(data: list, _ngram: int = 3, _top: int = 25, _windowSize: int = 1) -> list:
@@ -16,10 +16,10 @@ def text2Keywords(data: list, _ngram: int = 3, _top: int = 25, _windowSize: int 
 
     return_list = []
     if not (type(data) == list):
-        print("The given input is not a list, converting to list")
+        #print("The given input is not a list, converting to list")
         data = [data]
 
-    for text in tqdm(data):
+    for text in data:
         keywords = kw_extractor.extract_keywords(text)
 
         keywords_list = []
@@ -28,7 +28,7 @@ def text2Keywords(data: list, _ngram: int = 3, _top: int = 25, _windowSize: int 
 
         return_list.append(keywords_list)
 
-    for i in tqdm(range(len(return_list))):
+    for i in range(len(return_list)):
         str_tmp = ""
         for keyword in return_list[i]:
             str_tmp += str(keyword) + " "
@@ -47,7 +47,7 @@ def text2Embeddings(sentences: list, sentence_transformer: str = "msmarco-distil
     model = SentenceTransformer(sentence_transformer)
 
     embeddings = []
-    for sentence in tqdm(sentences):
+    for sentence in sentences:
         embedding = model.encode(sentence)
         embeddings.append(embedding)
 

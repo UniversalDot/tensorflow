@@ -1,0 +1,5 @@
+
+.idea
+dataset/embeddings-msmarco-distilbert-base-v4.csv
+RestfulAPI/jobsdesc_embeddings_use.csv
+__pycache__
