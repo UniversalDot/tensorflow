@@ -1,0 +1,25 @@
+name: Check Set-Up & Build
+on:
+  push: # Run checks on push to any branch, for early notification of issues
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+    # Checkout
+    - uses: actions/checkout@v3
+
+    # Install python dependencies
+   - uses: actions/setup-python@v4
+    with:
+    python-version: '3.9'
+    cache: 'pip' # caching pip dependencies
+    - run: pip install -r requirements.txt
+
+
+    # # Install dependencies and build
+    # - name: Run
+    #   run: |
+    #     flask run
+    #   env:
+    #     CI: false
