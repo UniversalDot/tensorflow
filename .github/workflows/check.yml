@@ -1,6 +1,8 @@
 name: Check Set-Up & Build
 on:
   push: # Run checks on push to any branch, for early notification of issues
+  pull_request:
+    branches: [ develop ]
 
 jobs:
   check:
