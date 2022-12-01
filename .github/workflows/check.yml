@@ -1,0 +1,28 @@
+name: Check Set-Up & Build
+on:
+  push: # Run checks on push to any branch, for early notification of issues
+  pull_request:
+    branches: [ develop ]
+    
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+    # Checkout
+    - uses: actions/checkout@v3
+
+    # Install python dependencies
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip' # caching pip dependencies
+    - run: pip install -r requirements.txt
+
+
+    # Run Restful-api demo
+    # - name: Run
+    #   run: |
+    #     cd restful-api
+    #     flask run
+    #   env:
+    #     CI: false
