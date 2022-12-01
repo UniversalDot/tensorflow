@@ -22,6 +22,7 @@ jobs:
     # Install dependencies and build
     - name: Run
       run: |
+        cd restful-api
         flask run
       env:
         CI: false
