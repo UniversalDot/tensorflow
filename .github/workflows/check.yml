@@ -3,7 +3,7 @@ on:
   push: # Run checks on push to any branch, for early notification of issues
   pull_request:
     branches: [ develop ]
-
+    
 jobs:
   check:
     runs-on: ubuntu-22.04
@@ -12,10 +12,10 @@ jobs:
     - uses: actions/checkout@v3
 
     # Install python dependencies
-   - uses: actions/setup-python@v4
-    with:
-    python-version: '3.9'
-    cache: 'pip' # caching pip dependencies
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip' # caching pip dependencies
     - run: pip install -r requirements.txt
 
 
