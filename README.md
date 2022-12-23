@@ -1,13 +1,17 @@
 # Tensorflow
 This repository contains the TensorFlow models and its associated data.
 
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-# Model creation
+## Dataset
+
+Contains the existing sample datasets in csv format and key embeddings of the data.
+
+## ipython-notebooks
+
 The model used for the recommendation system is the [ScaNN](https://github.com/google-research/google-research/tree/master/scann) implemented through [Tensorflow](https://www.tensorflow.org/recommenders/api_docs/python/tfrs/layers/factorized_top_k/ScaNN) to allow serving with Tensorflow Serving service.
 The model creation process each time requires different steps:
 - Preprocessing
@@ -17,18 +21,10 @@ The model creation process each time requires different steps:
 - Training of the ScaNN
 - Testing
 - Saving and serving
-## Preprocessing
-### Simple text preprocessing
-### Keyword extraction
-TODO
-## Embedding
-TODO
-## Training
-The training of the ScaNN can be found in model_creation folder
-## Testing
-TODO
-## Saving and serving
-The saving of the ScaNN can be found in model_creation folder
+
+
+## restful-api
+Sample demo application that narrows down the job-search based on location, reputation, etc through a flask api. For more, see the [README.md](/restful-api/README.md) in the subfolder.
 # Deployment
 
 The model is deployed to Tensorflow Serving. Its design is outlined in the image below.
