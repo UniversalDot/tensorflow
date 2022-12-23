@@ -91,7 +91,7 @@ class predict(Resource):
         print("Filtered on Reputation                :",
               time.time() - start_time, "Remaining Jobs:", len(filtered_reputation))
 
-        # Filter on Availability; Eliminate the tasks that requieres more hours a week than the user has.
+        # Filter on Availability; Eliminate the tasks that requires more hours a week than the user has.
         start_time = time.time()
         filtered_availability = filtered_reputation[filtered_reputation["Hours Needed"] < AVAILABILITY]
         print("Filtered on Availability              :",
