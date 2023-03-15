@@ -1,6 +1,8 @@
 # Tensorflow
 This repository contains the TensorFlow models and its associated data.
 
+![Logo](https://github.com/UniversalDot/documents/blob/master/logo/universaldot-logo/rsz_jpg-02.jpg)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
